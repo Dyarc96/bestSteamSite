@@ -6,8 +6,6 @@ import P from '../components/Typography/P/P1';
 import MainSlider from '../components/Slider/MainSlider';
 import Span from '../components/Span/Span';
 import { colors } from '../utils/colors';
-import Icon1 from '../components/Icons/Icons1';
-import icon1 from './../../public/static/img/icons8-automatic-car-wash-100.png';
 import eye from './../../public/icons/eye.png';
 import heart from './../../public/icons/heart-outline.png';
 import userTie from './../../public/icons/manager.png';
