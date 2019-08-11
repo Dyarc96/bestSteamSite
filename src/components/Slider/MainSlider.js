@@ -43,6 +43,7 @@ const StyledLogo = styled.img`
 const SliderContainer = styled.div`
     width: 100%;
     height: 55vh;
+    overflow: hidden;
     @media (max-width: 500px) {
         display: flex;
         justify-content: center;
@@ -142,12 +143,13 @@ export default class MainSlider extends Component {
         if({render}) {
             return (
                 <div>
-                {/* <StyledContainer>
+                <StyledContainer>
                     <SliderContainer>
                         <StyledLogo src={logo}/>
                         <Nav/>
                         <DisplayContainer style={displayTrigger()}>
-                        <Slider {...settings}>
+                        <StyledImg src={srcSetter1()}></StyledImg>
+                        {/* <Slider {...settings}>
                             <div>
                                 <StyledImg src={srcSetter1()}/>
                             </div>
@@ -157,10 +159,10 @@ export default class MainSlider extends Component {
                             <div>
                                 <StyledImg  src={srcSetter3()}/>
                             </div>
-                        </Slider>
+                        </Slider> */}
                         </DisplayContainer>
                     </SliderContainer>
-                </StyledContainer> */}
+                </StyledContainer>
                 </div>
             )
         } else {

@@ -23,7 +23,6 @@ const IndexContainer = styled.div`
   height: 100%;
   margin: 0 auto;
   box-shadow: 0px 0px 50px rgba(29,37,47,0.8);
-  overflow-x: hidden;
   @media (max-width: 1100px) {
     width: 100%;
   }
@@ -41,7 +40,6 @@ const BeforeAfterContainer = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 450px;
     padding: 0;
     height: 250px;
   }
@@ -95,17 +93,22 @@ const ImgContainer = styled.div`
  overflow: hidden;
  width: 90%;
  margin: 0 auto;
+ display: flex;
+ justify-content: center;
 
   @media (max-width: 800px) {
     width: 500px;
+    height: 300px;
   }
 
   @media (max-width: 520px) {
     width: 400px;
+    height: 250px;
   }
 
   @media (max-width: 450px) {
-    width: 100%
+    width: 100%;
+    overflow: hidden;
   }
 `
 
@@ -117,7 +120,7 @@ const BeforeBox = styled.div`
   clip-path: polygon(50% 0%, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%, 0 0);  
   color: white;
   top: 50%;
-  left: 5%;
+  left: 12%;
   z-index: 100;
   font-size: 20px;
   display: flex;
@@ -150,7 +153,7 @@ const AfterBox = styled.div`
   clip-path: polygon(50% 0%, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%, 0 0);  
   color: white;
   top: 50%;
-  left: 86%;
+  left: 78%;
   z-index: 100;
   font-size: 20px;
   display: flex;
@@ -158,10 +161,6 @@ const AfterBox = styled.div`
   align-items: center;
   text-transform: uppercase;
   font-family: Helvetica;
-
-  @media (max-width: 903px) {
-    left: 84%;
-  }
 
   @media (max-width: 803px) {
     font-size: 15px;
@@ -185,6 +184,20 @@ const H = styled.h2`
   text-align: center;
   position: absolute;
   top: 25%;
+`
+
+const StyledImg = styled.img`
+    min-width: 80%;
+    height: 500px;
+
+    @media (max-width: 800px) {
+      width: 500px;
+      height: 300px;
+    }
+
+    @media (max-width: 480px) {
+      width: 350px;
+    }
 `
 
 const P1 = styled.p`
@@ -278,16 +291,11 @@ class IndexPage extends React.Component {
       </AttributesContainer>
       <P>Jak to robimy?</P>
       <BeforeAfterContainer>
-        {/* <BeforeBox>Przed</BeforeBox>
+        <BeforeBox>Przed</BeforeBox>
         <ImgContainer>
-        <BeforeAfterSlider
-        before={handleWidthChangeSrc1()}
-        after={handleWidthChangeSrc2()}
-        width={handleWidthChange1()}
-        height={handleWidthChange2()}
-        />
+          <StyledImg src={after}></StyledImg>
         <AfterBox>Po</AfterBox>
-        </ImgContainer> */}
+        </ImgContainer>
 
       </BeforeAfterContainer>
       </IndexContainer>
