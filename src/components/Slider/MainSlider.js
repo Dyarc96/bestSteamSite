@@ -52,8 +52,7 @@ const SliderContainer = styled.div`
 `
 
 const StyledImg = styled.img`
-    max-width: 1200px;
-    height: 405px;
+
     
     @media (max-width: 720px) {
         height: 296px;
