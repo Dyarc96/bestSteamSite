@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import Slider from 'react-slick';
-import $ from 'jquery';
-import 'slick-carousel';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+// import { window, document } from 'browser-monads';
 import Nav from '../Nav/Nav';
 import logo from '../../../public/static/img/logo.png';
 import styled from 'styled-components';
@@ -71,48 +67,67 @@ const DisplayContainer = styled.div`
     display: block;
 `
 
+// Modus operandi
+// We need to move it from render to componentDidMount
+
 export default class MainSlider extends Component {
 
+    state = { width: null, render: false }
+
+    componentDidMount() {
+        this.setState({ width: window.innerWidth, render: true });
+        if (typeof window !== 'undefined') {
+            console.log(`Location: ${window.location.href}`);
+          }
+    }
+
     render() {
+        if (typeof window !== 'undefined') {
+            let iInnerHeight = window.innerHeight;
+          }
+    
+        const { render } = this.state.render;
+
         const srcSetter1 = () => {
-        if (window.innerWidth <= 725) {
-            return firstSmall
-        } else {
-            return first
+            if (this.state.width <= 725) {
+                return firstSmall
+            } else {
+                return first
+            }
         }
-    }
-
-    const srcSetter2 = () => {
-        if (window.innerWidth <= 725) {
-            return secondSmall
-        } else {
-            return second
+    
+        const srcSetter2 = () => {
+            if (this.state.width <= 725) {
+                return secondSmall
+            } else {
+                return second
+            }
         }
-    }
-
-    const srcSetter3 = () => {
-        if (window.innerWidth <= 725) {
-            return thirdSmall
-        } else {
-            return third
+    
+        const srcSetter3 = () => {
+            if (this.state.width <= 725) {
+                return thirdSmall
+            } else {
+                return third
+            }
         }
-    }
-
-    const displayStyle = {
-        display: 'block'
-    }
-
-    const notDisplayStyle = {
-        display: 'none'
-    }
-
-    const displayTrigger = () => {
-        if (window.innerWidth < 500) {
-            return notDisplayStyle
-        } else {
-            return displayStyle
+    
+        const displayStyle = {
+            display: 'block'
         }
-    }
+    
+        const notDisplayStyle = {
+            display: 'none'
+        }
+    
+        const displayTrigger = () => {
+            if (this.state.width < 500) {
+                return notDisplayStyle
+            } else {
+                return displayStyle
+            }
+        }
+
         const settings = {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -124,26 +139,33 @@ export default class MainSlider extends Component {
             speed: 1000
         };
         
-        return (
-            <StyledContainer>
-                <SliderContainer>
-                    <StyledLogo src={logo}/>
-                    <Nav/>
-                    <DisplayContainer style={displayTrigger()}>
-                    <Slider {...settings}>
-                        <div>
-                            <StyledImg src={srcSetter1()}/>
-                        </div>
-                        <div>
-                            <StyledImg src={srcSetter2()}/>
-                        </div>
-                        <div>
-                            <StyledImg  src={srcSetter3()}/>
-                        </div>
-                    </Slider>
-                    </DisplayContainer>
-                </SliderContainer>
-            </StyledContainer>
-        )
+        if({render}) {
+            return (
+                <div>
+                {/* <StyledContainer>
+                    <SliderContainer>
+                        <StyledLogo src={logo}/>
+                        <Nav/>
+                        <DisplayContainer style={displayTrigger()}>
+                        <Slider {...settings}>
+                            <div>
+                                <StyledImg src={srcSetter1()}/>
+                            </div>
+                            <div>
+                                <StyledImg src={srcSetter2()}/>
+                            </div>
+                            <div>
+                                <StyledImg  src={srcSetter3()}/>
+                            </div>
+                        </Slider>
+                        </DisplayContainer>
+                    </SliderContainer>
+                </StyledContainer> */}
+                </div>
+            )
+        } else {
+            return null
+        }
+            
     }
 }

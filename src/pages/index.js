@@ -15,7 +15,7 @@ import beforeExtraSmall from '../../public/static/img/before-extraSmall.jpg';
 import afterExtraSmall from '../../public/static/img/after-extraSmall.jpg';
 import after from '../../public/static/img/after.jpg';
 import afterSmall from '../../public/static/img/after-small.jpg';
-import BeforeAfterSlider from 'react-before-after-slider';
+// import BeforeAfterSlider from 'react-before-after-slider';
 
 const IndexContainer = styled.div`
   background-color: ${colors.black};
@@ -201,42 +201,50 @@ const P1 = styled.p`
 `
 
 class IndexPage extends React.Component {
+  state = { width: null }
+
+  componentDidMount() {
+      this.setState({ width: window.innerWidth });
+        if (typeof window !== 'undefined') {
+            console.log(`Location: ${window.location.href}`);
+    }
+  }
   render() {
 
   const handleWidthChange1 = () => {
-      if (window.innerWidth >= 800) {
+      if (this.state.width >= 800) {
           return 1000
-      } else if (window.innerWidth < 800){
+      } else if (this.state.width < 800){
           return 500
-      } else if (window.innerWidth < 500) {
+      } else if (this.state.width < 500) {
         return 300
       }
   }
 
   const handleWidthChange2 = () => {
-    if (window.innerWidth >= 800) {
+    if (this.state.width >= 800) {
         return 500
-    } else if (window.innerWidth < 800) {
+    } else if (this.state.width < 800) {
         return 250
 }
   }
 
   const handleWidthChangeSrc1 = () => {
-      if (window.innerWidth >=800) {
+      if (this.state.width >=800) {
           return before
-      } else if (window.innerWidth < 800) {
+      } else if (this.state.width < 800) {
           return beforeSmall
-      } else if (window.innerWidth < 500) {
+      } else if (this.state.width < 500) {
         return beforeExtraSmall
       }
   }
 
   const handleWidthChangeSrc2 = () => {
-        if (window.innerWidth >= 800) {
+        if (this.state.width >= 800) {
           return after
-      } else if (window.innerWidth < 800) {
+      } else if (this.state.width < 800) {
           return afterSmall
-      } else if (window.innerWidth < 500) {
+      } else if (this.state.width < 500) {
         return afterExtraSmall
       }
     }
@@ -270,7 +278,7 @@ class IndexPage extends React.Component {
       </AttributesContainer>
       <P>Jak to robimy?</P>
       <BeforeAfterContainer>
-        <BeforeBox>Przed</BeforeBox>
+        {/* <BeforeBox>Przed</BeforeBox>
         <ImgContainer>
         <BeforeAfterSlider
         before={handleWidthChangeSrc1()}
@@ -279,7 +287,7 @@ class IndexPage extends React.Component {
         height={handleWidthChange2()}
         />
         <AfterBox>Po</AfterBox>
-        </ImgContainer>
+        </ImgContainer> */}
 
       </BeforeAfterContainer>
       </IndexContainer>
