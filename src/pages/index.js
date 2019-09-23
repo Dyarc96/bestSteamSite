@@ -15,7 +15,16 @@ import beforeExtraSmall from '../../public/static/img/before-extraSmall.jpg';
 import afterExtraSmall from '../../public/static/img/after-extraSmall.jpg';
 import after from '../../public/static/img/after.jpg';
 import afterSmall from '../../public/static/img/after-small.jpg';
-// import BeforeAfterSlider from 'react-before-after-slider';
+import first from '../../public/static/img/sliderPhotos/1.jpg';
+// import firstSmall from '../../../public/static/img/sliderPhotos/1-small.jpg';
+import second from '../../public/static/img/sliderPhotos/2.jpg'
+// import secondSmall from '../../../public/static/img/sliderPhotos/2-small.jpg';
+import third from '../../public/static/img/sliderPhotos/3.jpg';
+// import thirdSmall from '../../../public/static/img/sliderPhotos/3-small.jpg';
+import '../components/Slider/sliderClasses.css';
+import BeforeAfterSlider from 'react-before-after-slider';
+
+const slides = [first, second, third];
 
 const IndexContainer = styled.div`
   background-color: ${colors.black};
@@ -265,7 +274,7 @@ class IndexPage extends React.Component {
   return (
     <Layout>
       <IndexContainer>
-      <MainSlider/>
+      <MainSlider slides={slides}/>
       <H1>Best<Span>Steam</Span> Autodetailing</H1>
       <P>Co nas wyróznia</P>
       <AttributesContainer>

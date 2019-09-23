@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-// import { window, document } from 'browser-monads';
 import Nav from '../Nav/Nav';
 import logo from '../../../public/static/img/logo.png';
 import styled from 'styled-components';
-import first from '../../../public/static/img/sliderPhotos/1.jpg';
-import firstSmall from '../../../public/static/img/sliderPhotos/1-small.jpg';
-import second from '../../../public/static/img/sliderPhotos/2.jpg'
-import secondSmall from '../../../public/static/img/sliderPhotos/2-small.jpg';
-import third from '../../../public/static/img/sliderPhotos/3.jpg';
-import thirdSmall from '../../../public/static/img/sliderPhotos/3-small.jpg';
+import Slide from './Slide';
+import './sliderClasses.css';
 
 const StyledContainer = styled.div`
     position: relative;
     margin: 0 auto;
     outline: none;
+    overflow: hidden;
 `
 
 const StyledLogo = styled.img`
@@ -23,7 +19,7 @@ const StyledLogo = styled.img`
     left: 5%;
     height: 15rem;
     position: absolute;
-    z-index: 0;
+    z-index: 15;
 
     @media (max-width: 720px) {
         top: 25%;
@@ -51,123 +47,133 @@ const SliderContainer = styled.div`
     }
 `
 
-const StyledImg = styled.img`
-    width: 100%;
-    min-width: 1300px;
+// const Slide = styled.img`
+//     width: 100%;
+//     min-width: 1300px;
+//     z-index: 500;
     
-    @media (max-width: 720px) {
-        height: 296px;
-        max-width: 720px;
-        margin: 20px 0;
-      }
-`
+//     @media (max-width: 720px) {
+//         height: 296px;
+//         max-width: 720px;
+//         margin: 20px 0;
+//       }
+// `
 
 const DisplayContainer = styled.div`
     height: 100%;
     width: 100%;
     display: block;
 `
-
-// Modus operandi
-// We need to move it from render to componentDidMount
+const s = {
+    container: "fullW fullH rel overflowH",
+    onScreen: "left0",
+    offScreenRight: "left100",
+    offScreenLeft: "leftM100",
+    transition: "transition1l"
+};
 
 export default class MainSlider extends Component {
-
-    state = { width: null, render: false }
+    constructor(props) {
+        super(props);
+        this.state = {
+            slide1: {
+                id: 0,
+                position: s.onScreen,
+                transition: true
+            }, 
+            slide2: {
+                id: 1,
+                position: s.offScreenRight,
+                transition: true
+            },
+            currentId: 0
+        }
+    }
 
     componentDidMount() {
-        this.setState({ width: window.innerWidth, render: true });
-        if (typeof window !== 'undefined') {
-            console.log(`Location: ${window.location.href}`);
-          }
+        this.startCarousel();
+    }
+
+    startCarousel = () => {
+        this.carouselInterval = setInterval(() => {
+            this.transitionSlides();
+        }, 4000);
+    };
+
+    componentWillUnmount() {
+        clearInterval(this.carouselInterval);
+    }
+
+    transitionSlides = () => {
+        const { slide1, slide2 } = this.state;
+        let currentId;
+        if (slide1["position"] === s.onScreen) {
+            slide1["position"] = s.offScreenLeft;
+            slide2["position"] = s.onScreen;
+            currentId = slide2.id;
+        } else {
+            slide1["position"] = s.onScreen;
+            slide2["position"] = s.offScreenLeft;
+            currentId = slide1.id;
+        }
+        this.setSlideState(slide1, slide2, currentId);
+        setTimeout(() => {
+            this.resetSlideOffScreen();
+        }, 1000);
+    };
+
+    setSlideState = (slide1, slide2, currentId) => {
+        this.setState({
+            slide1: slide1,
+            slide2: slide2,
+            currentId: currentId
+        });
+    };
+
+    resetSlideOffScreen = () => {
+        const { slide1, slide2, currentId } = this.state;
+        const { slides } = this.props;
+        if (slide1["position"] === s.offScreenLeft) {
+            slide1["transition"] = false;
+            slide1["position"] = s.offScreenRight;
+            slide1["id"] = slide1.id + 1 === slides.length ? 0 : slide1.id + 1;
+        }
+        this.setSlideState(slide1, slide2, currentId);
+        this.resetSlideTransitions(slide1, slide2, currentId);
+    }
+
+    resetSlideTransitions = (slide1, slide2, currentId) => {
+        setTimeout(() => {
+            slide1["transition"] = true;
+            slide2["transition"] = true;
+            this.setSlideState(slide1, slide2, currentId);
+        }, 500);
     }
 
     render() {
-        if (typeof window !== 'undefined') {
-            let iInnerHeight = window.innerHeight;
-          }
-    
-        const { render } = this.state.render;
+        const { slide1, slide2, currentId } = this.state;
+        const { slides } = this.props;
 
-        const srcSetter1 = () => {
-            if (this.state.width <= 725) {
-                return firstSmall
-            } else {
-                return first
-            }
-        }
-    
-        const srcSetter2 = () => {
-            if (this.state.width <= 725) {
-                return secondSmall
-            } else {
-                return second
-            }
-        }
-    
-        const srcSetter3 = () => {
-            if (this.state.width <= 725) {
-                return thirdSmall
-            } else {
-                return third
-            }
-        }
-    
-        const displayStyle = {
-            display: 'block'
-        }
-    
-        const notDisplayStyle = {
-            display: 'none'
-        }
-    
-        const displayTrigger = () => {
-            if (this.state.width < 500) {
-                return notDisplayStyle
-            } else {
-                return displayStyle
-            }
-        }
-
-        const settings = {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 4000,
-            arrows: false,
-            fade: true,
-            easing: 'ease-in',
-            speed: 1000
-        };
-        
-        if({render}) {
             return (
                 <div>
                 <StyledContainer>
                     <SliderContainer>
                         <StyledLogo src={logo}/>
                         <Nav/>
-                        <DisplayContainer style={displayTrigger()}>
-                        <StyledImg src={srcSetter1()}></StyledImg>
-                        {/* <Slider {...settings}>
-                            <div>
-                                <StyledImg src={srcSetter1()}/>
-                            </div>
-                            <div>
-                                <StyledImg src={srcSetter2()}/>
-                            </div>
-                            <div>
-                                <StyledImg  src={srcSetter3()}/>
-                            </div>
-                        </Slider> */}
+                        <DisplayContainer>
+                            <Slide image={slides[slide1.id]}
+                                   position={slide1.position}
+                                   transition={slide1.transition ? s.transition : ""}
+                            />
+                            <Slide 
+                                   image={slides[slide2.id]}
+                                   position={slide2.position}
+                                   transition={slide2.transition ? s.transition : ""}
+                            />
                         </DisplayContainer>
                     </SliderContainer>
                 </StyledContainer>
                 </div>
             )
-        } else {
-            return null
-        }
-            
     }
 }
