@@ -19,7 +19,7 @@ const StyledLogo = styled.img`
     left: 5%;
     height: 15rem;
     position: absolute;
-    z-index: 15;
+    z-index: 5;
 
     @media (max-width: 720px) {
         top: 25%;
@@ -47,22 +47,14 @@ const SliderContainer = styled.div`
     }
 `
 
-// const Slide = styled.img`
-//     width: 100%;
-//     min-width: 1300px;
-//     z-index: 500;
-    
-//     @media (max-width: 720px) {
-//         height: 296px;
-//         max-width: 720px;
-//         margin: 20px 0;
-//       }
-// `
-
 const DisplayContainer = styled.div`
     height: 100%;
     width: 100%;
     display: block;
+
+    @media (max-width: 500px) {
+        display: none;
+    }
 `
 const s = {
     container: "fullW fullH rel overflowH",
@@ -85,8 +77,7 @@ export default class MainSlider extends Component {
                 id: 1,
                 position: s.offScreenRight,
                 transition: true
-            },
-            currentId: 0
+            }
         }
     }
 
@@ -106,17 +97,14 @@ export default class MainSlider extends Component {
 
     transitionSlides = () => {
         const { slide1, slide2 } = this.state;
-        let currentId;
         if (slide1["position"] === s.onScreen) {
             slide1["position"] = s.offScreenLeft;
             slide2["position"] = s.onScreen;
-            currentId = slide2.id;
         } else {
             slide1["position"] = s.onScreen;
             slide2["position"] = s.offScreenLeft;
-            currentId = slide1.id;
         }
-        this.setSlideState(slide1, slide2, currentId);
+        this.setSlideState(slide1, slide2 );
         setTimeout(() => {
             this.resetSlideOffScreen();
         }, 1000);
@@ -131,27 +119,28 @@ export default class MainSlider extends Component {
     };
 
     resetSlideOffScreen = () => {
-        const { slide1, slide2, currentId } = this.state;
-        const { slides } = this.props;
+        const { slide1, slide2 } = this.state;
         if (slide1["position"] === s.offScreenLeft) {
             slide1["transition"] = false;
             slide1["position"] = s.offScreenRight;
-            slide1["id"] = slide1.id + 1 === slides.length ? 0 : slide1.id + 1;
+        } else {
+            slide2["transition"] = false;
+            slide2["position"] = s.offScreenRight;
         }
-        this.setSlideState(slide1, slide2, currentId);
-        this.resetSlideTransitions(slide1, slide2, currentId);
+        this.setSlideState(slide1, slide2);
+        this.resetSlideTransitions(slide1, slide2);
     }
 
-    resetSlideTransitions = (slide1, slide2, currentId) => {
+    resetSlideTransitions = (slide1, slide2) => {
         setTimeout(() => {
             slide1["transition"] = true;
             slide2["transition"] = true;
-            this.setSlideState(slide1, slide2, currentId);
+            this.setSlideState(slide1, slide2);
         }, 500);
     }
 
     render() {
-        const { slide1, slide2, currentId } = this.state;
+        const { slide1, slide2 } = this.state;
         const { slides } = this.props;
 
             return (
@@ -160,7 +149,7 @@ export default class MainSlider extends Component {
                     <SliderContainer>
                         <StyledLogo src={logo}/>
                         <Nav/>
-                        <DisplayContainer>
+                        <DisplayContainer className="display-container">
                             <Slide image={slides[slide1.id]}
                                    position={slide1.position}
                                    transition={slide1.transition ? s.transition : ""}

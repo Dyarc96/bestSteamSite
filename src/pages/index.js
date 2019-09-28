@@ -6,6 +6,7 @@ import P from '../components/Typography/P/P1';
 import MainSlider from '../components/Slider/MainSlider';
 import Span from '../components/Span/Span';
 import { colors } from '../utils/colors';
+import carInside from './../../public/static/img/carInside.jpeg';
 import eye from './../../public/icons/eye.png';
 import heart from './../../public/icons/heart-outline.png';
 import userTie from './../../public/icons/manager.png';
@@ -13,16 +14,16 @@ import before from '../../public/static/img/before.jpg';
 import beforeSmall from '../../public/static/img/before-small.jpg';
 import beforeExtraSmall from '../../public/static/img/before-extraSmall.jpg';
 import afterExtraSmall from '../../public/static/img/after-extraSmall.jpg';
-import after from '../../public/static/img/after.jpg';
 import afterSmall from '../../public/static/img/after-small.jpg';
 import first from '../../public/static/img/sliderPhotos/1.jpg';
 // import firstSmall from '../../../public/static/img/sliderPhotos/1-small.jpg';
 import second from '../../public/static/img/sliderPhotos/2.jpg'
 // import secondSmall from '../../../public/static/img/sliderPhotos/2-small.jpg';
 import third from '../../public/static/img/sliderPhotos/3.jpg';
+import after from '../../public/static/img/after.jpg';
 // import thirdSmall from '../../../public/static/img/sliderPhotos/3-small.jpg';
 import '../components/Slider/sliderClasses.css';
-import BeforeAfterSlider from 'react-before-after-slider';
+import BeforeAfterSlider from '../components/Slider/BeforeAfterSlider';
 
 const slides = [first, second, third];
 
@@ -42,6 +43,14 @@ const BeforeAfterContainer = styled.div`
   margin: 25px auto 0 auto;
   background-color: ${colors.whitish};
   padding: 40px;
+  width: 100%;
+  height: 600px;
+  overflow-y: hidden;
+  background:    
+      linear-gradient(
+      rgba(229, 229, 229, 0.7), 
+      rgba(229, 229, 229, 0.8)
+    ), url(${carInside});
 
   @media (max-width: 800px) {
     padding: 10px;
@@ -300,10 +309,11 @@ class IndexPage extends React.Component {
       </AttributesContainer>
       <P>Jak to robimy?</P>
       <BeforeAfterContainer>
-        <BeforeBox>Przed</BeforeBox>
+        {/* <BeforeBox>Przed</BeforeBox> */}
         <ImgContainer>
-          <StyledImg src={after}></StyledImg>
-        <AfterBox>Po</AfterBox>
+          {/* <StyledImg src={after}></StyledImg> */}
+          <BeforeAfterSlider/>
+        {/* <AfterBox>Po</AfterBox> */}
         </ImgContainer>
 
       </BeforeAfterContainer>

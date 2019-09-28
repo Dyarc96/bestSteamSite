@@ -1,96 +1,106 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
-import before from '../../../public/static/img/beforeAfterphotos/before.jpg'
-import after from '../../../public/static/img/beforeAfterphotos/after.jpg';
-import before1 from '../../../public/static/img/beforeAfterphotos/before1.jpg';
-import after1 from '../../../public/static/img/beforeAfterphotos/after1.jpg';
-import before2 from '../../../public/static/img/beforeAfterphotos/before2.jpg';
-import after2 from '../../../public/static/img/beforeAfterphotos/after2.jpg';
-import carInside from '../../../public/static/img/carInside.jpeg';
-import P2 from '../Typography/P/P2';
+import after from '../../../public/static/img/after.jpg';
+import before from '../../../public/static/img/before.jpg';
+import ReactCompareImage from 'react-compare-image';
 
-const descendImage = keyframes`
-    0% {
-        top: -100%;
-        opacity: 0;
-    }
-
-    50% {
-        top: -50%;
-        opacity: 0.5;
-    }
-
-    100% {
-        top: 0;
-        opacity: 1;
-    }
-`
 
 const StyledContainer = styled.div`
-    width: 90%;
-    height: 60rem;
-    margin: 10rem auto 0 auto;
-    overflow-y: hidden;
-    background:    
-        linear-gradient(
-        rgba(229, 229, 229, 0.7), 
-        rgba(229, 229, 229, 0.8)
-      ), url(${carInside});
-    `
-const FlexContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-`
-
-const StyledImageBefore = styled.img`
-    width: 35rem;
-    height: 35rem;
-    position: absolute;
-    z-index: 5;
-`
-
-const StyledImageAfter = styled.img`
-    width: 35rem;
-    height: 35rem;
-    position: absolute;
-    z-index: 0;
-`
-
-const ImgContainer = styled.div`
     position: relative;
-    margin-top: -10rem;
-    height: 35rem;
-    width: 35rem;
+    overflow: hidden;
+`
 
-    &:hover ${StyledImageAfter} {
-        z-index: 10;
-        animation: ${descendImage} .5s linear;
+// const StyledBeforeImg = styled.img`
+//     width: 80%;
+//     display: block;
+//     position: absolute;
+//     height: 75%;
+// `
+
+const ResizeContainer = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+`
+
+const Handle = styled.span`
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    margin-left: -2px;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: ew-resize;
+
+    &:after {
+        position: absolute;
+        top: 50%;
+        width: 64px;
+        height: 64px;
+        margin: -32px 0 0 -32px;
+
+        content: '';
+        color: white;
+        font-weight: bold;
+        font-size: 36px;
+        text-align: center;
+        line-height: 64px;
+        background: #ffb800;
+        border: 1px solid #e6a600;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        box-shadow:      
+         0 2px 6px rgba(0,0,0,.3), 
+        inset 0 2px 0 rgba(255,255,255,.5),
+        inset 0 60px 50px -30px #ffd466;
     }
 `
 
-const ChangeToggle = () => {
+class ChangeToggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { width: null }
+    }
+
+    componentDidMount() {
+        if(window) {
+            this.setState({ width: window.innerWidth });
+            window.addEventListener('resize', this.updateDimensions);
+        }
+    }
+
+    updateDimensions = () => {
+        this.setState({ width: window.innerWidth });
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions);
+    }
+
+    drag = (dragElement, resizeElement, container) => {
+        dragElement.addEventListener('dragstart', console.log(dragElement));
+    }
+
+    render() {
         return (
-                <StyledContainer>
-                    <P2>Najedź na obrazek i poczuj różnicę</P2>
-                    <FlexContainer>
-                        <ImgContainer>                
-                            <StyledImageBefore src={before}/>
-                                <StyledImageAfter src={after}/>
-                        </ImgContainer>
-                        <ImgContainer>
-                            <StyledImageBefore src={before1}/>
-                            <StyledImageAfter src={after1}/>
-                        </ImgContainer>
-                        <ImgContainer>
-                            <StyledImageBefore src={before2}/>
-                            <StyledImageAfter src={after2}/>
-                        </ImgContainer>
-                    </FlexContainer>
-                </StyledContainer>
-        )
+            <StyledContainer>
+                    {/* <StyledImg src={before}/>
+                    <ResizeContainer>
+                    <StyledImg src={after}/>
+                    </ResizeContainer>
+                    <Handle/>
+                    <p>window width: {this.state.width}</p> */}
+                    <ReactCompareImage
+                    leftImage={after}
+                    rightImage={before}
+                    />
+            </StyledContainer>
+    )
+    }
 }
 
 export default ChangeToggle;
