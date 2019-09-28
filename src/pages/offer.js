@@ -12,7 +12,6 @@ import powloka from '../../public/static/img/offerPhotos/powloka.jpeg';
 import tapicerka from '../../public/static/img/offerPhotos/tapicerka.jpg';
 import lakier  from '../../public/static/img/offerPhotos/lakier.jpg';
 
-
 const AboutContainer = styled.div`
     position: relative;
     background-color: ${colors.black};
@@ -29,7 +28,6 @@ const NavContainer = styled.div`
     width: 100%;
     position: relative;
 `
-
 
 const PhotoContainer = styled.div`
     position: relative;
@@ -95,7 +93,6 @@ const StyledImg = styled.img`
     }
 `
 
-
 const StyledLogo = styled.img`
     width: 15rem;
     z-index: 100;
@@ -158,7 +155,6 @@ const Photo = styled.img`
     overflow: hidden;
     z-index: 5;
 `
-
 
 class AboutPage extends Component {
 

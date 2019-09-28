@@ -117,19 +117,7 @@ const P = styled.p`
 const Icon = styled.img`
     width: 50px;
     height: 50px;
-    position: absolute;
-    left: 75px;
-    bottom: -25px;
-
-    @media (max-width: 500px) {
-        bottom: -250px;
-        left: 35px;
-    }
-
-    @media (max-width: 400px) {
-        bottom: -250px;
-        left: 5px;
-    }
+    margin-top: 10px;
 `
 
 class ContactPage extends Component {
@@ -149,7 +137,7 @@ class ContactPage extends Component {
                         <P>Poraj: ul. Okulickiego 1 <br></br>
                         Poniedziałek - Piątek 8:00 - 19:00 <br></br>
                         </P>
-                        <P>Nie zapomnij polubić na facebook'u!</P>
+                        <P>Nie zapomnij polubić nas na facebook'u!</P>
                         <a href="https://www.facebook.com/pg/beststeam.autodetailing/photos/" rel="noopener noreferrer" target="_blank"><Icon src={facebook}></Icon></a>
                     </StyledArticle>
                 </IframeContainer>
