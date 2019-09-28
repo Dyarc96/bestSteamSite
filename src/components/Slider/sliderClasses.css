@@ -18,28 +18,8 @@
     height: 70px;
 }
 
-.dGray {
-    background-color: #333;
-}
-
-.white {
-    background-color: #ffffff;
-}
-
-.white50 {
-    background-color: #ffffff80;
-}
-
-.black50 {
-    background-color: #00000080;
-}
-
 .imgCover {
     object-fit: cover;
-}
-
-.overflowH {
-    overflow: hidden;
 }
 
 .transition1l {
@@ -64,43 +44,4 @@
 
 .leftM100 {
     left: -100%;
-}
-
-.bot0 {
-    bottom: 0;
-}
-
-.df {
-    display: flex;
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-}
-
-.fCenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.flex1 {
-    flex: 1;
-}
-
-.flex8 {
-    flex: 8;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    transition: background-color 1s ease-in-out;
 }

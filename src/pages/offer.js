@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Layout from '../Layout/Layout';
 import styled from 'styled-components';
-import { keyframes } from 'styled-components';
 import { Link } from 'gatsby';
 import Nav from '../components/Nav/Nav';
 import carInside from './../../public/static/img/carInside.jpeg';
 import logo from './../../public/static/img/logo.png';
-import H2 from '../components/Typography/H2/H2';
 import { colors } from '../utils/colors';
 import  felga  from '../../public/static/img/offerPhotos/felga.jpg';
 import korektaLakieru from '../../public/static/img/offerPhotos/korektaLakieru.jpg';

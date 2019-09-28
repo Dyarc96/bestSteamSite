@@ -77,7 +77,8 @@ export default class MainSlider extends Component {
                 id: 1,
                 position: s.offScreenRight,
                 transition: true
-            }
+            },
+            currentId: 0
         }
     }
 
@@ -97,14 +98,17 @@ export default class MainSlider extends Component {
 
     transitionSlides = () => {
         const { slide1, slide2 } = this.state;
+        let currentId;
         if (slide1["position"] === s.onScreen) {
             slide1["position"] = s.offScreenLeft;
             slide2["position"] = s.onScreen;
+            currentId = slide2.id;
         } else {
             slide1["position"] = s.onScreen;
             slide2["position"] = s.offScreenLeft;
+            currentId = slide1.id;
         }
-        this.setSlideState(slide1, slide2 );
+        this.setSlideState(slide1, slide2, currentId );
         setTimeout(() => {
             this.resetSlideOffScreen();
         }, 1000);
@@ -119,23 +123,26 @@ export default class MainSlider extends Component {
     };
 
     resetSlideOffScreen = () => {
-        const { slide1, slide2 } = this.state;
+        const { slide1, slide2, currentId } = this.state;
+        const { slides } = this.props;
         if (slide1["position"] === s.offScreenLeft) {
             slide1["transition"] = false;
             slide1["position"] = s.offScreenRight;
+            slide1["id"] = slide2.id + 1 === slides.length ? 0 : slide2.id + 1;
         } else {
             slide2["transition"] = false;
             slide2["position"] = s.offScreenRight;
+            slide2["id"] = slide1.id + 1 === slides.length ? 0 : slide1.id + 1;
         }
-        this.setSlideState(slide1, slide2);
-        this.resetSlideTransitions(slide1, slide2);
+        this.setSlideState(slide1, slide2, currentId);
+        this.resetSlideTransitions(slide1, slide2, currentId);
     }
 
-    resetSlideTransitions = (slide1, slide2) => {
+    resetSlideTransitions = (slide1, slide2, currentId) => {
         setTimeout(() => {
             slide1["transition"] = true;
             slide2["transition"] = true;
-            this.setSlideState(slide1, slide2);
+            this.setSlideState(slide1, slide2, currentId);
         }, 500);
     }
 

@@ -3,7 +3,6 @@ import React from 'react';
 import { colors } from '../../utils/colors';
 import { Link } from 'gatsby';
 import { slide as Menu } from 'react-burger-menu';
-// import logo from './../../public/static/img/logo.png';
 
 const NavBar = styled.nav`
     position: absolute;
@@ -64,101 +63,77 @@ const HamburgerIcon = styled.div`
     
 `
 
-const Bar1 = styled.div`
-    width: 35px;
-    height: 5px;
-    background-color: ${colors.white};
-    margin: 6px 0;
-    transition: 0.4s;
-`
-const Bar2 = styled.div`
-    width: 35px;
-    height: 5px;
-    background-color: ${colors.white};
-    margin: 6px 0;
-    transition: 0.4s;
-
-    ${HamburgerIcon}:checked &  {
-        opacity: 0;
-    }
-`
-const Bar3 = styled.div`
-    width: 35px;
-    height: 5px;
-    background-color: ${colors.white};
-    margin: 6px 0;
-    transition: 0.4s;
-`
-
-
 const StyledLink = styled(props => <Link {...props}/>)`
     color: ${colors.primary};
     text-decoration: none;
-`
+    outline: none;
+    `
 const StyledHref = styled.a`
     color: ${colors.primary};
     text-decoration: none;
+    outline: none;
+    z-index: 500;
 `
-
 
 
 class Nav extends React.Component {
     showSettings(event) {
         event.preventDefault();
+    }
 
+    redirect() {
+        window.open('https://www.facebook.com/pg/beststeam.autodetailing/photos/')
     }
 
     render() {
 
         var styles = {
-  bmBurgerButton: {
-    position: 'fixed',
-    width: '36px',
-    height: '30px',
-    right: '35px',
-    top: '20px'
-  },
-  bmBurgerBars: {
-    background: 'white'
-  },
-  bmBurgerBarsHover: {
-    background: '#a90000'
-  },
-  bmCrossButton: {
-    height: '24px',
-    width: '24px'
-  },
-  bmCross: {
-    background: '#bdc3c7'
-  },
-  bmMenuWrap: {
-    position: 'fixed',
-    height: '100%'
-  },
-  bmMenu: {
-    background: '#0b0b0b',
-    padding: '2.5em 1.5em 0',
-    fontSize: '1.15em',
-    marginTop: '-32px'
-  },
-  bmMorphShape: {
-    fill: '#373a47'
-  },
-  bmItemList: {
-    color: '#b8b7ad',
-    padding: '0.8em'
-  },
-  bmItem: {
-    display: 'inline-block'
-  },
-  bmOverlay: {
-    background: 'rgba(0, 0, 0, 0.3)'
-  }
-}
+            bmBurgerButton: {
+                position: 'fixed',
+                width: '36px',
+                height: '30px',
+                right: '35px',
+                top: '20px'
+            },
+            bmBurgerBars: {
+                background: 'white'
+            },
+            bmBurgerBarsHover: {
+                background: '#a90000'
+            },
+            bmCrossButton: {
+                height: '24px',
+                width: '24px'
+            },
+            bmCross: {
+                background: '#bdc3c7'
+            },
+            bmMenuWrap: {
+                position: 'fixed',
+                height: '100%'
+            },
+            bmMenu: {
+                background: '#0b0b0b',
+                padding: '2.5em 1.5em 0',
+                fontSize: '1.15em',
+                marginTop: '-32px'
+            },
+            bmMorphShape: {
+                fill: '#373a47'
+            },
+            bmItemList: {
+                color: '#b8b7ad',
+                padding: '0.8em'
+            },
+            bmItem: {
+                display: 'inline-block'
+            },
+            bmOverlay: {
+                background: 'rgba(0, 0, 0, 0.3)'
+            }
+        }
 
-
-
-        return (
+    return (
             <>
             <NavBar>
                 <StyledList>
@@ -171,7 +146,7 @@ class Nav extends React.Component {
                 <HamburgerIcon onClick={this.showSettings}>
                 <Menu styles={styles} right>
                 <StyledListItem><StyledLink className="menu-item" to="/about">o nas</StyledLink></StyledListItem>
-                    <StyledListItem><StyledHref href="https://www.facebook.com/pg/beststeam.autodetailing/photos/" target="_blank">galeria</StyledHref></StyledListItem>
+                    <StyledListItem><StyledHref onClick={this.redirect} className="menu-item">galeria</StyledHref></StyledListItem>
                     <StyledListItem><StyledLink className="menu-item" to="/offer">oferta</StyledLink></StyledListItem>
                     <StyledListItem><StyledLink className="menu-item" to="/contact">kontakt</StyledLink></StyledListItem></Menu>
                 </HamburgerIcon>

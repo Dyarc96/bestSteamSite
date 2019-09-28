@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from '../utils/theme';
-import { colors } from '../utils/colors';
 
 const GlobalStyle = createGlobalStyle`
   html {

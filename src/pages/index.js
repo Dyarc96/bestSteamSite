@@ -1,29 +1,20 @@
 import React from "react";
 import Layout from '../Layout/Layout';
 import styled from 'styled-components';
+import { colors } from '../utils/colors';
+import MainSlider from '../components/Slider/MainSlider';
+import BeforeAfterSlider from '../components/Slider/BeforeAfterSlider';
 import H1 from '../components/Typography/H1/H1';
 import P from '../components/Typography/P/P1';
-import MainSlider from '../components/Slider/MainSlider';
 import Span from '../components/Span/Span';
-import { colors } from '../utils/colors';
 import carInside from './../../public/static/img/carInside.jpeg';
 import eye from './../../public/icons/eye.png';
 import heart from './../../public/icons/heart-outline.png';
 import userTie from './../../public/icons/manager.png';
-import before from '../../public/static/img/before.jpg';
-import beforeSmall from '../../public/static/img/before-small.jpg';
-import beforeExtraSmall from '../../public/static/img/before-extraSmall.jpg';
-import afterExtraSmall from '../../public/static/img/after-extraSmall.jpg';
-import afterSmall from '../../public/static/img/after-small.jpg';
 import first from '../../public/static/img/sliderPhotos/1.jpg';
-// import firstSmall from '../../../public/static/img/sliderPhotos/1-small.jpg';
 import second from '../../public/static/img/sliderPhotos/2.jpg'
-// import secondSmall from '../../../public/static/img/sliderPhotos/2-small.jpg';
 import third from '../../public/static/img/sliderPhotos/3.jpg';
-import after from '../../public/static/img/after.jpg';
-// import thirdSmall from '../../../public/static/img/sliderPhotos/3-small.jpg';
 import '../components/Slider/sliderClasses.css';
-import BeforeAfterSlider from '../components/Slider/BeforeAfterSlider';
 
 const slides = [first, second, third];
 
@@ -32,7 +23,7 @@ const IndexContainer = styled.div`
   width: 90%;
   height: 100%;
   margin: 0 auto;
-  box-shadow: 0px 0px 50px rgba(29,37,47,0.8);
+  box-shadow: 0px 0px 50px ${colors.lightGray};
   @media (max-width: 1100px) {
     width: 100%;
   }
@@ -44,12 +35,12 @@ const BeforeAfterContainer = styled.div`
   background-color: ${colors.whitish};
   padding: 40px;
   width: 100%;
-  height: 600px;
+  height: 100%;
   overflow-y: hidden;
   background:    
       linear-gradient(
-      rgba(229, 229, 229, 0.7), 
-      rgba(229, 229, 229, 0.8)
+      ${colors.backgroundFilter1},
+      ${colors.backgroundFilter2}, 
     ), url(${carInside});
 
   @media (max-width: 800px) {
@@ -130,72 +121,6 @@ const ImgContainer = styled.div`
   }
 `
 
-const BeforeBox = styled.div`
-  position: absolute;
-  width: 100px;
-  height: 75px;
-  background-color: ${colors.primary};
-  clip-path: polygon(50% 0%, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%, 0 0);  
-  color: white;
-  top: 50%;
-  left: 12%;
-  z-index: 100;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  font-family: Helvetica;
-
-  @media (max-width: 803px) {
-    font-size: 15px;
-    height: 50px;
-    width: 60px;
-    left: 12.5%;
-  }
-
-  @media (max-width: 680px) {
-    margin-left: -38px;
-  }
-
-  @media (max-width: 430px) {
-    display: none;
-  }
-`
-
-const AfterBox = styled.div`
-  position: absolute;
-  width: 100px;
-  height: 75px;
-  background-color: ${colors.primary};
-  clip-path: polygon(50% 0%, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%, 0 0);  
-  color: white;
-  top: 50%;
-  left: 78%;
-  z-index: 100;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  font-family: Helvetica;
-
-  @media (max-width: 803px) {
-    font-size: 15px;
-    height: 50px;
-    width: 60px;
-    left: 79%;
-  }
-
-  @media (max-width: 680px) {
-    left: 80%
-  }
-
-  @media (max-width: 430px) {
-    display: none;
-  }
-`
-
 const H = styled.h2`
   color: ${colors.black};
   font-size: 20px;
@@ -204,23 +129,9 @@ const H = styled.h2`
   top: 25%;
 `
 
-const StyledImg = styled.img`
-    min-width: 80%;
-    height: 500px;
-
-    @media (max-width: 800px) {
-      width: 500px;
-      height: 300px;
-    }
-
-    @media (max-width: 480px) {
-      width: 350px;
-    }
-`
 
 const P1 = styled.p`
-  color: ${colors.gray};
-  color: #636363;
+  color: ${colors.paragraphGray};
   font-size: 16px;
   text-align: left;
   position: absolute;
@@ -231,54 +142,7 @@ const P1 = styled.p`
   }
 `
 
-class IndexPage extends React.Component {
-  state = { width: null }
-
-  componentDidMount() {
-      this.setState({ width: window.innerWidth });
-        if (typeof window !== 'undefined') {
-            console.log(`Location: ${window.location.href}`);
-    }
-  }
-  render() {
-
-  const handleWidthChange1 = () => {
-      if (this.state.width >= 800) {
-          return 1000
-      } else if (this.state.width < 800){
-          return 500
-      } else if (this.state.width < 500) {
-        return 300
-      }
-  }
-
-  const handleWidthChange2 = () => {
-    if (this.state.width >= 800) {
-        return 500
-    } else if (this.state.width < 800) {
-        return 250
-}
-  }
-
-  const handleWidthChangeSrc1 = () => {
-      if (this.state.width >=800) {
-          return before
-      } else if (this.state.width < 800) {
-          return beforeSmall
-      } else if (this.state.width < 500) {
-        return beforeExtraSmall
-      }
-  }
-
-  const handleWidthChangeSrc2 = () => {
-        if (this.state.width >= 800) {
-          return after
-      } else if (this.state.width < 800) {
-          return afterSmall
-      } else if (this.state.width < 500) {
-        return afterExtraSmall
-      }
-    }
+const IndexPage = () => {
 
   return (
     <Layout>
@@ -309,18 +173,14 @@ class IndexPage extends React.Component {
       </AttributesContainer>
       <P>Jak to robimy?</P>
       <BeforeAfterContainer>
-        {/* <BeforeBox>Przed</BeforeBox> */}
         <ImgContainer>
-          {/* <StyledImg src={after}></StyledImg> */}
           <BeforeAfterSlider/>
-        {/* <AfterBox>Po</AfterBox> */}
         </ImgContainer>
 
       </BeforeAfterContainer>
       </IndexContainer>
     </Layout>
   )
-  }
 }
 
 export default IndexPage;

@@ -8,7 +8,6 @@ import logo from './../../public/static/img/logo.png';
 import H2 from '../components/Typography/H2/H2';
 import { colors } from '../utils/colors';
 import facebook from '../../public/icons/facebook.png';
-import { styledHref } from '../components/Nav/Nav';
 
 const AboutContainer = styled.div`
     position: relative;
@@ -151,7 +150,7 @@ class ContactPage extends Component {
                         Poniedziałek - Piątek 8:00 - 19:00 <br></br>
                         </P>
                         <P>Nie zapomnij polubić na facebook'u!</P>
-                        <a href="https://www.facebook.com/pg/beststeam.autodetailing/photos/" target="_blank"><Icon src={facebook}></Icon></a>
+                        <a href="https://www.facebook.com/pg/beststeam.autodetailing/photos/" rel="noopener noreferrer" target="_blank"><Icon src={facebook}></Icon></a>
                     </StyledArticle>
                 </IframeContainer>
 

@@ -14,7 +14,7 @@ const AboutContainer = styled.div`
     width: 90%;
     height: 100%;
     margin: 0 auto;
-    box-shadow: 0px 0px 50px rgba(29,37,47,0.8);
+    box-shadow: 0px 0px 50px ${colors.lightGray};
     overflow-x: hidden;
 
     @media (max-width: 1100px) {
